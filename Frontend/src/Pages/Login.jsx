@@ -78,7 +78,7 @@ function Login() {
               </button>
               {isDropdownOpen && (
                 <div className="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10">
-                  {['student', 'teacher', 'hod', 'admin'].map((type) => (
+                  {['Student', 'Teacher', 'HOD', 'Admin'].map((type) => (
                     <div
                       key={type}
                       className="px-4 py-2 hover:bg-pink-50 cursor-pointer flex items-center gap-2 transition-colors"
