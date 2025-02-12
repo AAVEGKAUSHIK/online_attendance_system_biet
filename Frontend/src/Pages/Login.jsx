@@ -8,13 +8,13 @@ function Login() {
 
   const getUserTypeIcon = (type) => {
     switch (type) {
-      case 'student':
+      case 'Student':
         return <GraduationCap className="w-5 h-5 text-pink-600" />;
       case 'teacher':
         return <BookOpen className="w-5 h-5 text-pink-600" />;
-      case 'hod':
+      case 'HOD':
         return <Users className="w-5 h-5 text-pink-600" />;
-      case 'admin':
+      case 'Admin':
         return <UserCog className="w-5 h-5 text-pink-600" />;
       default:
         return <User className="w-5 h-5 text-pink-600" />;
