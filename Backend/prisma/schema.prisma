@@ -63,7 +63,7 @@ model Employee {
   gender           Gender
   role             EmployeeRole
   avtar            String?
-  designation      Designation
+  designation      Designation?
   qualification    String
   dateOfBirth      DateTime
   dateOfJoining    DateTime
@@ -71,8 +71,8 @@ model Employee {
   permanentAddress String
   temporaryAddress String?
   isVerified       Boolean           @default(false)
-  department       Department?       @relation(fields: [departmentId], references: [id])
-  departmentId     Int?
+  department       Department        @relation(fields: [departmentId], references: [id])
+  departmentId     Int
   assignedTeachers AssignedTeacher[] // Changed from subjects_taught
 }
 
@@ -97,8 +97,8 @@ model Student {
   permanentAddress    String
   temporaryAddress    String?
   category            Category
-  department          Department?  @relation(fields: [departmentId], references: [id])
-  departmentId        Int?
+  department          Department   @relation(fields: [departmentId], references: [id])
+  departmentId        Int          @unique
   presentSubjects     Subject[]    @relation("StudentSubjects")
   attendances         Attendance[]
 }
