@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BookOpen, GraduationCap, Lock, User, School, ChevronDown, UserCog, Users } from 'lucide-react';
 import logo from '../../public/Images/biet.png';
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [userType, setUserType] = useState('student');
@@ -131,9 +132,9 @@ function Login() {
 
        
             <div className="text-center">
-              <a href="#" className="text-sm text-pink-600 hover:text-pink-800 transition-colors">
-                Forgot your password?
-              </a>
+            <Link to="/forgot-password" className="text-sm text-pink-600 hover:text-pink-800 transition-colors">
+  Forgot your password?
+</Link>
             </div>
           </form>
         </div>
