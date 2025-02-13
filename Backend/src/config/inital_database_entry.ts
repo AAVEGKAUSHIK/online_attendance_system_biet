@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function main() {
+export async function create_inital_db_entry() {
   const departments = [
     {
       name: "Computer Science",
@@ -34,12 +34,12 @@ async function main() {
     },
   ];
   for (const department of departments) {
+    if (
+      await prisma.department.findUnique({ where: { name: department.name } })
+    )
+      continue;
     await prisma.department.create({
       data: department,
     });
   }
 }
-
-main()
-  .catch((e) => console.error(e))
-  .finally(async () => await prisma.$disconnect());

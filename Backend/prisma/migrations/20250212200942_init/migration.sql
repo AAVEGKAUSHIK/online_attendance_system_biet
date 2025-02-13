@@ -33,7 +33,7 @@ CREATE TABLE `Employee` (
     `gender` ENUM('male', 'female', 'other') NOT NULL,
     `role` ENUM('admin', 'teacher', 'headOfDepartment') NOT NULL,
     `avtar` VARCHAR(191) NULL,
-    `designation` ENUM('professor', 'assistantProfessor') NOT NULL,
+    `designation` ENUM('professor', 'assistantProfessor') NULL,
     `qualification` VARCHAR(191) NOT NULL,
     `dateOfBirth` DATETIME(3) NOT NULL,
     `dateOfJoining` DATETIME(3) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `Employee` (
     `permanentAddress` VARCHAR(191) NOT NULL,
     `temporaryAddress` VARCHAR(191) NULL,
     `isVerified` BOOLEAN NOT NULL DEFAULT false,
-    `departmentId` INTEGER NULL,
+    `departmentId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Employee_username_key`(`username`),
     UNIQUE INDEX `Employee_email_key`(`email`),
@@ -71,12 +71,13 @@ CREATE TABLE `Student` (
     `permanentAddress` VARCHAR(191) NOT NULL,
     `temporaryAddress` VARCHAR(191) NULL,
     `category` ENUM('general', 'sc', 'st', 'obc', 'others') NOT NULL,
-    `departmentId` INTEGER NULL,
+    `departmentId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Student_rollNumber_key`(`rollNumber`),
     UNIQUE INDEX `Student_email_key`(`email`),
     UNIQUE INDEX `Student_phoneNumber_key`(`phoneNumber`),
     UNIQUE INDEX `Student_guardianPhoneNumber_key`(`guardianPhoneNumber`),
+    UNIQUE INDEX `Student_departmentId_key`(`departmentId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -116,10 +117,10 @@ CREATE TABLE `_StudentSubjects` (
 ALTER TABLE `Subject` ADD CONSTRAINT `Subject_departmentId_fkey` FOREIGN KEY (`departmentId`) REFERENCES `Department`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Employee` ADD CONSTRAINT `Employee_departmentId_fkey` FOREIGN KEY (`departmentId`) REFERENCES `Department`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Employee` ADD CONSTRAINT `Employee_departmentId_fkey` FOREIGN KEY (`departmentId`) REFERENCES `Department`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Student` ADD CONSTRAINT `Student_departmentId_fkey` FOREIGN KEY (`departmentId`) REFERENCES `Department`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Student` ADD CONSTRAINT `Student_departmentId_fkey` FOREIGN KEY (`departmentId`) REFERENCES `Department`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `AssignedTeacher` ADD CONSTRAINT `AssignedTeacher_teacherId_fkey` FOREIGN KEY (`teacherId`) REFERENCES `Employee`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
