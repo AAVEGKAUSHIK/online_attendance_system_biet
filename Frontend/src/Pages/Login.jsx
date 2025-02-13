@@ -9,13 +9,13 @@ function Login() {
 
   const getUserTypeIcon = (type) => {
     switch (type) {
-      case 'student':
+      case 'Student':
         return <GraduationCap className="w-5 h-5 text-pink-600" />;
       case 'teacher':
         return <BookOpen className="w-5 h-5 text-pink-600" />;
-      case 'hod':
+      case 'HOD':
         return <Users className="w-5 h-5 text-pink-600" />;
-      case 'admin':
+      case 'Admin':
         return <UserCog className="w-5 h-5 text-pink-600" />;
       default:
         return <User className="w-5 h-5 text-pink-600" />;
@@ -79,7 +79,7 @@ function Login() {
               </button>
               {isDropdownOpen && (
                 <div className="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-10">
-                  {['student', 'teacher', 'hod', 'admin'].map((type) => (
+                  {['Student', 'Teacher', 'HOD', 'Admin'].map((type) => (
                     <div
                       key={type}
                       className="px-4 py-2 hover:bg-pink-50 cursor-pointer flex items-center gap-2 transition-colors"
@@ -125,7 +125,7 @@ function Login() {
        
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
+              className="w-full cursor-pointer bg-gradient-to-r from-pink-500 to-purple-600 text-white py-3 rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl"
             >
               Login
             </button>
