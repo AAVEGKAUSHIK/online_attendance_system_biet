@@ -13,13 +13,13 @@ export const login = async (req: Request, res: Response) => {
       const { username, password } = req.body as LoginInput;
   
 
-      const user = await prisma.user.findUnique({ where: { username } });
+      const user = await prisma.employee.findUnique({ where: { username } });
       if (!user) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
   
 
-      const validPassword = await bcrypt.compare(password, user.passwordHash);
+      const validPassword = await bcrypt.compare(password, user.password);
       if (!validPassword) {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
@@ -42,10 +42,11 @@ export const login = async (req: Request, res: Response) => {
 
       res.json({
         id: user.id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         role: user.role,
-        department: user.department
+        department: user.departmentId
       });
   
     } catch (error) {
