@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect  } from 'react';
 import { BookOpen, GraduationCap, Lock, User, School, ChevronDown, UserCog, Users } from 'lucide-react';
 import logo from '../../public/Images/biet.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [userType, setUserType] = useState('student');
+  const [userType, setUserType] = useState('Student');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const getUserTypeIcon = (type) => {
     switch (type) {
       case 'Student':
         return <GraduationCap className="w-5 h-5 text-pink-600" />;
-      case 'teacher':
+      case 'Teacher':
         return <BookOpen className="w-5 h-5 text-pink-600" />;
       case 'HOD':
         return <Users className="w-5 h-5 text-pink-600" />;
@@ -22,23 +25,44 @@ function Login() {
     }
   };
 
- 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username && password) {
+      switch (userType) {
+        case 'Student':
+          navigate('/student-dashboard');
+          break;
+        case 'Teacher':
+          navigate('/teacher-dashboard');
+          break;
+        case 'HOD':
+          navigate('/hod-dashboard');
+          break;
+        case 'Admin':
+          navigate('/admin-dashboard');
+          break;
+        default:
+          alert('Invalid user type');
+      }
+    } else {
+      alert('Please enter username and password');
+    }
+  };
   const [isAnimated, setIsAnimated] = useState(false);
 
- 
+  // Trigger animation when component mounts
   useEffect(() => {
     setIsAnimated(true);
   }, []);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gradient-to-r from-pink-50 to-purple-50">
-    
+  
       <div className="md:w-1/2 bg-gradient-to-r from-pink-500 to-purple-600 p-8 md:p-12 flex items-center justify-center">
         <div className="max-w-2xl text-white text-center">
           <div className="mb-8 md:mb-16">
             <img
               src={logo}
-              alt="BIET Logo"
               className="mx-auto h-24 w-24 md:h-32 md:w-32 rounded-md shadow-lg"
             />
           </div>
@@ -48,9 +72,8 @@ function Login() {
               BUNDELKHAND INSTITUTE OF ENGINEERING & TECHNOLOGY, JHANSI
             </h1>
           </div>
-       
           <h2
-            className={`text-3xl md:text-4xl font-[anzo1] mb-6 transition-all duration-3000 ease-out ${
+            className={`text-3xl md:text-4xl font-[anzo1] mb-6 transition-all duration-1000 ease-out ${
               isAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
@@ -59,12 +82,11 @@ function Login() {
         </div>
       </div>
 
-      
       <div className="md:w-1/2 bg-white p-8 md:p-12 flex items-center justify-center">
         <div className="w-full max-w-md">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Login to Your Account</h2>
-          <form className="space-y-6">
-       
+          <form className="space-y-6" onSubmit={handleLogin}>
+     
             <div className="relative">
               <button
                 type="button"
@@ -96,7 +118,6 @@ function Login() {
               )}
             </div>
 
-         
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <User className="h-5 w-5 text-gray-400" />
@@ -105,11 +126,12 @@ function Login() {
                 type="text"
                 className="block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white shadow-sm hover:shadow-md transition-shadow"
                 placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
 
-  
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Lock className="h-5 w-5 text-gray-400" />
@@ -118,6 +140,8 @@ function Login() {
                 type="password"
                 className="block w-full pl-10 pr-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white shadow-sm hover:shadow-md transition-shadow"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -130,11 +154,10 @@ function Login() {
               Login
             </button>
 
-       
             <div className="text-center">
-            <Link to="/forgot-password" className="text-sm text-pink-600 hover:text-pink-800 transition-colors">
-  Forgot your password?
-</Link>
+              <Link to="/forgot-password" className="text-sm text-pink-600 hover:text-pink-800 transition-colors">
+                Forgot your password?
+              </Link>
             </div>
           </form>
         </div>
