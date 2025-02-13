@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import prisma from "./config/prisma";
+import authRouter from './routes/auth'
 
 import adminRouter from "./routes/admin";
 import { create_inital_db_entry } from "./config/inital_database_entry";
+import { authenticate } from "./middlewares/authMiddleware";
 
 // Load environment variables
 dotenv.config();
@@ -17,6 +19,8 @@ app.use(express.json());
 
 // Basic route
 app.use("/api/admin", adminRouter);
+app.use("/api/auth", authRouter);
+
 
 // Start the server, and prisma client
 app.listen(port, () => {
