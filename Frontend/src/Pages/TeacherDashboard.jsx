@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Layout from '../Components/Layout';  // Changed path
+import Dashboard from '../Components/Dashboard';
+import AttendanceSheet from '../Components/AttendenceSheet';
+import OverallReport from '../Components/OverallReport';
 
-function AdminDashboard() {
+function TeacherDashboard() {
+  const [currentPage, setCurrentPage] = useState('dashboard');
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-red-50 to-yellow-50">
-      <h1 className="text-3xl font-bold text-gray-900">Welcome to hod Dashboard</h1>
-    </div>
+    <Layout currentPage={currentPage} onPageChange={setCurrentPage}>
+      {currentPage === 'dashboard' && <Dashboard />}
+      {currentPage === 'attendance' && <AttendanceSheet />}
+      {currentPage === 'report' && <OverallReport />}
+    </Layout>
   );
 }
 
-export default AdminDashboard;
+export default TeacherDashboard;
