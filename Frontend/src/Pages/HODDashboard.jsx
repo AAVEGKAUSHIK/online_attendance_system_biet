@@ -22,14 +22,14 @@ function HODDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-indigo-50 to-amber-50 flex">
-      {/* Sidebar */}
+     
       <div 
         className={`fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-teal-600 to-indigo-700 backdrop-blur-xl transform transition-transform duration-300 ease-out border-r border-indigo-500/20 ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 lg:relative shadow-2xl shadow-indigo-900/30`}
       >
         <div className="h-full flex flex-col">
-          {/* Sidebar Header */}
+        
           <div className="p-6 border-b border-indigo-500/20">
             <div className="flex items-center space-x-3">
               <img 
@@ -44,7 +44,7 @@ function HODDashboard() {
             </div>
           </div>
 
-          {/* Sidebar Navigation */}
+         
           <nav className="flex-1 p-4">
             <ul className="space-y-3">
               {menuItems.map((item) => {
@@ -77,7 +77,7 @@ function HODDashboard() {
       
         <header className="lg:hidden bg-gradient-to-r from-teal-600/60 to-indigo-700/60 backdrop-blur-md p-4 border-b border-indigo-500/20">
           <div className="flex items-center justify-between">
-            {/* Toggle Button for Mobile */}
+           
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="text-indigo-100 p-2 hover:bg-white/10 rounded-xl transition-colors hover:text-white"
